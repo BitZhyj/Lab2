@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+     <include file="struts-default.xml"/>
+
+      <package name="Search" extends="struts-default">
+      	<action name="SearchByAuthor" class="Search.SearchByAuthor">
+            <result>Author's books.jsp</result>
+       	</action>
+      	<action name="SearchByISBN" class="Search.SearchByISBN">
+            <result>Book.jsp</result>
+       	</action>
+       </package>
+       
+       <package name="delete" extends="struts-default">
+       	 <action name="DeleteByISBN" class="delete.DeleteByISBN">
+            <result name="success" type="redirect">
+	            <param name="location">/SearchByAuthor.action?name=${name}</param>
+	            <param name="encode">true</param>
+            </result>
+        </action>
+       </package>
+
+       <package name="updata" extends="struts-default">
+       	 <action name="AddNewBook" class="updata.AddNewBook">
+            <result name = "success">index.jsp</result>
+            <result name = "fail">ErrorReport.jsp</result>
+        </action>
+        <action name="AddNewAuthor" class="updata.AddNewAuthor">
+            <result name = "success">index.jsp</result>
+            <result name = "fail">ErrorReport.jsp</result>
+        </action>
+        <action name="UpdataBook" class="updata.UpdataBook">
+            <result>UpdataBook.jsp</result>
+        </action>
+        <action name="UpdataInformation" class="updata.UpdataInformation">
+        	<result name="success" type="redirect">
+	            <param name="location">/SearchByISBN.action?ISBN=${ISBN}</param>
+	            <param name="encode">true</param>
+            </result>
+            <result name = "fail">ErrorReport.jsp</result>
+        </action>
+       </package>
+
+</struts>
